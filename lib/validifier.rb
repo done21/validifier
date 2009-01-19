@@ -3,25 +3,32 @@ require 'hpricot'
 require 'htmlentities'
 
 module Validifier
-  class FlashEmbed
+  WIDTH = 425
+  HEIGHT = 344
+  CODEBASE = "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+  CLASSID = "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+  
+  class FlashMovie
     attr_accessor :source, :width, :height, :params, :codebase, :classid, :comment
     
     def initialize(source, options={})
       @source = source
-      @width  = options[:width] || 425
-      @height = options[:height] || 344
-      @codebase = options[:codebase] || "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
-      @classid = options[:classid] || "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+      @width  = options[:width] || WIDTH
+      @height = options[:height] || HEIGHT
+      @codebase = options[:codebase] || 
+      @classid = options[:classid] || 
       @params = options[:params] || {}
       @comment = options[:comment] || ""
       
       @coder = HTMLEntities.new
     end
     
+    # nodoc
     def clean(str)
       @coder.encode(@coder.decode(str.to_s))
     end
-
+    
+    # The valid XHTML markup for this flash movie
     def to_s
       p = params.map {|k|}
       output = %Q{<!--[if !IE]> -->
@@ -40,6 +47,7 @@ module Validifier
     
     class <<self
       
+      # Build a FlashMovie based on chunk of HTML (with object and/or embed code)
       def from_source(html_str)
         html = Hpricot(html_str)
         if object = (html/:object).first
@@ -50,6 +58,10 @@ module Validifier
           return nil
         end
         fe
+      end
+      
+      def validify(html_str, options = {})
+        FlashMovie.new(source, options).to_s
       end
       
     private
@@ -72,7 +84,7 @@ module Validifier
         
         set_dimensions_from_style object[:style], options
         
-        FlashEmbed.new(source, options)
+        FlashMovie.new(source, options)
       end
       
       def scrape_embed(embed)
@@ -91,7 +103,7 @@ module Validifier
         
         set_dimensions_from_style embed[:style], options
         
-        FlashEmbed.new(source, options)
+        FlashMovie.new(source, options)
       end
       
       def set_dimensions_from_style style, options

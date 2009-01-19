@@ -9,7 +9,7 @@ Echoe.new('validifier', '0.1.0') do |p|
   p.email          = "jim@done21.com"
   p.ignore_pattern = ["tmp/*", "script/*"]
   p.development_dependencies = []
-  p.runtime_dependencies = ["hpricot"]
+  p.runtime_dependencies = ["hpricot", "htmlentities"]
 end
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }
