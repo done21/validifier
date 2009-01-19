@@ -2,7 +2,7 @@
 
 Validifier allows you to generate valid XHTML flash embed code in ruby. 
 
-= Usage
+= Usage 
 
 You can create a flash movie by supplying it with the data manually, or by supplying it with
 existing embed code.

@@ -60,8 +60,9 @@ module Validifier
         movie
       end
       
-      def validify(html_str, options = {})
-        FlashMovie.new(source, options).to_s
+      # Convert html to valid XHTML
+      def validify(html_str)
+        FlashMovie.from_source(html_str).to_s
       end
       
     private
