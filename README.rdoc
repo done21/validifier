@@ -1,0 +1,44 @@
+= Validifier
+
+Validifier allows you to generate valid XHTML flash embed code in ruby. 
+
+= Usage
+
+You can create a flash movie by supplying it with the data manually, or by supplying it with
+existing embed code.
+
+== Creating a flash movie manually
+
+To create a new flash movie manually, just supply the path or url to your swf file and your options	
+
+	movie = Validifier::FlashMovie.new("http://example.com/index.swf", {:width => 640, :height => 480})
+	
+	movie.to_s # => The embed code for your movie
+	
+== Creating a flash movie from existing embed source code
+	
+Validifier can also construct a flash movie from existing (x)html source code. You can access and update
+any of the properties of the movie
+
+	movie = Validifier::FlashMovie.from_source(existing_source_code_string)
+	
+	# Update any properties of the movie
+	movie.width = 640
+	movie.height = 480
+	movie.params["allowScriptAccess"] = "false"
+	
+	movie.to_s # => The embed code for your movie
+	
+If you only need to validify existing source code without modifying any propeties, you can use the validify method
+
+	Validifier::FlashMovie.validifiy(existing_source_code_string) # => valid embed code string
+	
+= Installation
+
+Add github as a gem source (once per machine)
+	
+	gem sources -a http://gems.github.com
+	
+Install the gem
+	
+	gem install done21-validifier

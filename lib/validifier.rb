@@ -51,13 +51,13 @@ module Validifier
       def from_source(html_str)
         html = Hpricot(html_str)
         if object = (html/:object).first
-          fe = scrape_object(object)
+          movie = scrape_object(object)
         elsif embed = (html/:embed).first
-          fe = scrape_embed(embed)
+          movie = scrape_embed(embed)
         else
           return nil
         end
-        fe
+        movie
       end
       
       def validify(html_str, options = {})
