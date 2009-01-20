@@ -30,7 +30,7 @@ module Validifier
     
     # The valid XHTML markup for this flash movie
     def to_s
-      p = params.map {|k|}
+      
       output = %Q{<!--[if !IE]> -->
   <object type="application/x-shockwave-flash" data="#{clean(source)}" width="#{clean(width)}" height="#{clean(height)}">
 <!-- <![endif]-->
@@ -39,6 +39,7 @@ module Validifier
     <param name="movie" value="#{clean(source)}" />
 <!--><!-- #{comment} -->
 }
+      params ||= {}
       params.each do |name, value|
        output << %Q{    <param name="#{clean(name)}" value="#{clean(value)}" />\n}
       end
