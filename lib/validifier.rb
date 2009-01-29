@@ -15,8 +15,8 @@ module Validifier
       @source = source
       @width  = options[:width] || WIDTH
       @height = options[:height] || HEIGHT
-      @codebase = options[:codebase] || 
-      @classid = options[:classid] || 
+      @codebase = options[:codebase] || CLASSID
+      @classid = options[:classid] || CODEBASE
       @params = options[:params] || {}
       @comment = options[:comment] || ""
       

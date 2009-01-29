@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('validifier', '0.1.2') do |p|
+Echoe.new('validifier', '0.1.3') do |p|
   p.description    = "Generate flash embed code that is valid XHTML"
   p.url            = "http://github.com/done21/validifier"
   p.author         = "Jim Hoskins"
