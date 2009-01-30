@@ -5,8 +5,8 @@ require 'htmlentities'
 module Validifier
   WIDTH = 425
   HEIGHT = 344
-  CODEBASE = "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
-  CLASSID = "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+  CLASSID = "http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+  CODEBASE = "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
   
   class FlashMovie
     attr_accessor :source, :width, :height, :params, :codebase, :classid, :comment
